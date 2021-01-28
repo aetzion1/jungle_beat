@@ -24,6 +24,38 @@ class NodeTest < Minitest::Test
 
         assert_equal "doop", @list.head.data
         assert_equal "deep", @list.head.next_node.data
+
+        @list.append("deep")
+
+        assert_equal "doop", @list.head.data
+        assert_equal "deep", @list.head.next_node.data
+        assert_equal "deep", @list.head.next_node.next_node.data
+    end
+
+    def test_it_can_prepend_data
+        @list.append("doop")
+        @list.append("da")
+        @list.append("deep")
+        @list.append("daa")
+
+        assert_equal "doop", @list.head.data
+
+        @list.prepend("da")
+
+        assert_equal "da", @list.head.data
+        assert_equal "doop", @list.head.next_node.data
+    end
+
+    def test_it_can_insert_data
+        @list.append("doop")
+        @list.append("deep")
+        @list.append("daa")
+
+        assert_equal "deep", @list.head.next_node.data
+
+        @list.insert(1, "da")
+
+        assert_equal "da", @list.head.next_node.data
     end
 
     def test_it_can_count_things_in_list
@@ -43,11 +75,11 @@ class NodeTest < Minitest::Test
         
         @list.append("doop")
 
-        assert_equal "doop", list.to_string
+        assert_equal "doop", @list.to_string
         
         @list.append("deep")
 
-        assert_equal "doop deep", list.to_string
+        assert_equal "doop deep", @list.to_string
     end
 
 end
